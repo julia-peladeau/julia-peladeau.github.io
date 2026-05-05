@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Julia Péladeau — Making & DIY</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; background: rgba(13,17,23,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); z-index: 100; }
+    nav .inner { max-width: 1000px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    nav .logo { font-weight: 700; font-size: 1rem; }
+    nav ul { display: flex; gap: 20px; list-style: none; }
+    nav ul a { color: var(--muted); font-size: 0.875rem; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    /* HERO */
+    .hero { max-width: 1000px; margin: 0 auto; padding: 64px 24px 48px; }
+    .hero-badge { display: inline-block; background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.25); color: var(--accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 18px; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 14px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { color: var(--muted); font-size: 1rem; max-width: 580px; margin-bottom: 24px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.85rem; border: 1px solid var(--border); padding: 7px 14px; border-radius: 7px; background: var(--surface); }
+    .back-link:hover { color: var(--text); text-decoration: none; border-color: var(--accent); }
+
+    /* SECTION */
+    .section { max-width: 1000px; margin: 0 auto; padding: 48px 24px; border-top: 1px solid var(--border); }
+    .section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 6px; }
+    .section-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 28px; }
+
+    /* GRID */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+
+    /* CARD */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.15s, transform 0.15s; }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* PHOTO LAYOUTS inside card */
+    .photos-single img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #13151a; }
+    .photos-single img.contain { object-fit: contain; padding: 20px; background: #13151a; }
+
+    .photos-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .photos-duo img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #13151a; }
+    .photos-duo img.contain { object-fit: contain; padding: 12px; background: #13151a; }
+
+    .photos-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+    .photos-trio img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #13151a; }
+    .photos-trio img.contain { object-fit: contain; padding: 8px; background: #13151a; }
+
+    .photos-main-thumb { display: flex; flex-direction: column; gap: 2px; }
+    .photos-main-thumb .main img { width: 100%; aspect-ratio: 4/3; object-fit: contain; padding: 16px; display: block; background: #13151a; }
+    .photos-main-thumb .thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .photos-main-thumb .thumbs img { width: 100%; aspect-ratio: 1/1; object-fit: contain; padding: 8px; display: block; background: #13151a; }
+
+    /* CARD BODY */
+    .card-body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .card-title { font-size: 0.95rem; font-weight: 700; }
+    .card-desc { font-size: 0.82rem; color: var(--muted); flex: 1; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+    .tag { background: rgba(88,166,255,0.1); color: #79c0ff; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); text-align: center; padding: 32px 24px; color: var(--muted); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="logo">Julia Péladeau</span>
+    <ul><li><a href="index.html">← Research Portfolio</a></li></ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Personal projects · Making & DIY</div>
+  <h1>Building things<br/><span>outside the lab</span></h1>
+  <p>When I'm not doing biomechanics research, I build things. Miniature architectural scenes, prop replicas, hand-carved sculptures — anything that requires patience, precision, and a bit of obsession.</p>
+  <a class="back-link" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to research portfolio
+  </a>
+</div>
+
+<!-- BOOK NOOKS -->
+<div class="section">
+  <div class="section-label">Miniature Architecture · Lighting · Scratch-built</div>
+  <div class="section-title">Book Nooks</div>
+  <div class="grid">
+
+    <!-- Diagon Alley -->
+    <div class="card">
+      <div class="photos-duo">
+        <img class="contain" src="diy-img/Image.png" alt="Diagon Alley book nook, lit"/>
+        <img class="contain" src="diy-img/Image2.png" alt="Diagon Alley book nook, angle view"/>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Book Nook : Diagon Alley (Harry Potter)</div>
+        <div class="card-desc">Fully scratch-built miniature alley from the Harry Potter universe, with integrated LED lighting, textured brick walls, detailed shopfronts (Ollivanders, Quality Quidditch Supplies...), hand-sculpted cobblestones, and hand-painted accessories throughout.</div>
+        <div class="card-tags"><span class="tag">Scratch-build</span><span class="tag">LED wiring</span><span class="tag">Painting</span><span class="tag">Miniature architecture</span></div>
+      </div>
+    </div>
+
+    <!-- Japan book nook -->
+    <div class="card">
+      <div class="photos-duo">
+        <img class="contain" src="diy-img/Image3.png" alt="Japanese alley book nook, front view"/>
+        <img class="contain" src="diy-img/Image4.png" alt="Japanese alley book nook, detail"/>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Book Nook : Japanese Alley</div>
+        <div class="card-desc">Traditional Japanese alley with red paper lanterns, wooden shopfronts, slate roof tiles, calligraphy signs, and a miniature bonsai. Integrated LED lighting creates a warm atmospheric glow for night display. Every element, from the roof tiles to the lanterns, is hand-crafted and hand-painted.</div>
+        <div class="card-tags"><span class="tag">Scratch-build</span><span class="tag">LED wiring</span><span class="tag">Japanese architecture</span><span class="tag">Hand-painted</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MINIATURES -->
+<div class="section">
+  <div class="section-label">Miniature Scenes · Wood & mixed media</div>
+  <div class="section-title">Miniatures</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photos-single"><img src="diy-img/wine_cellar.jpg" alt="Wine cellar miniature"/></div>
+      <div class="card-body">
+        <div class="card-title">Miniature : Wine Cellar</div>
+        <div class="card-desc">Miniature wine cellar with hand-built wooden bottle racks, assembled with miniature wine bottles, barrels, and accessories.</div>
+        <div class="card-tags"><span class="tag">Wood</span><span class="tag">Miniature scene</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photos-single"><img src="diy-img/class_room.jpg" alt="Classroom miniature, overhead view"/></div>
+      <div class="card-body">
+        <div class="card-title">Miniature : Classroom</div>
+        <div class="card-desc">Wooden school desks individually assembled, blackboard, bookcase, wall maps, and satchels, each piece of furniture built and painted separately.</div>
+        <div class="card-tags"><span class="tag">Wood</span><span class="tag">Hand-painted</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- HARRY POTTER PROPS -->
+<div class="section">
+  <div class="section-label">Prop replicas · Harry Potter universe</div>
+  <div class="section-title">Harry Potter Props</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photos-single"><img src="diy-img/Image11.jpg" alt="Harry Potter wands, hand-carved"/></div>
+      <div class="card-body">
+        <div class="card-title">Magic Wands inspired by Harry Potter</div>
+        <div class="card-desc">Hand-carved wands from real wood, shaped and painted after characters from the Harry Potter series. Each wand is unique, with hand-turned handles and custom paint finishes.</div>
+        <div class="card-tags"><span class="tag">Wood carving</span><span class="tag">Hand-painted</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photos-single"><img src="diy-img/Image12.jpg" alt="Marauder's Map, unfolded"/></div>
+      <div class="card-body">
+        <div class="card-title">Marauder's Map</div>
+        <div class="card-desc">Faithful replica of the Marauder's Map.</div>
+        <div class="card-tags"><span class="tag">Prop replica</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photos-single"><img src="diy-img/Image13.jpg" alt="Golden Snitch replica"/></div>
+      <div class="card-body">
+        <div class="card-title">Golden Snitch</div>
+        <div class="card-desc">Hand-sculpted and painted Golden Snitch replica with an aged gold metallic finish, replicating the iconic prop from the Harry Potter films.</div>
+        <div class="card-tags"><span class="tag">Sculpting</span><span class="tag">Metallic finish</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCI-FI BUILDS -->
+<div class="section">
+  <div class="section-label">Prop replicas · Sci-fi & Pop culture</div>
+  <div class="section-title">Sci-fi Builds</div>
+  <div class="grid">
+
+    <!-- Iron Man : 3 helmet views -->
+    <div class="card">
+      <div class="photos-trio">
+        <img class="contain" src="diy-img/Image5.png" alt="Iron Man helmet, side view"/>
+        <img class="contain" src="diy-img/Image6.png" alt="Iron Man helmet, lit"/>
+        <img class="contain" src="diy-img/Image7.png" alt="Iron Man helmet, front open"/>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Iron Man Helmet</div>
+        <div class="card-desc">Full-scale Iron Man helmet hand-built from cardboard, shaped and finished with multi-layer metallic red and gold paint. The faceplate is fully articulated and opens like in the films, with LED-lit eyes.</div>
+        <div class="card-tags"><span class="tag">Cardboard</span><span class="tag">Articulated</span><span class="tag">LED eyes</span><span class="tag">Full scale</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photos-single"><img class="contain" src="diy-img/Image15.jpg" alt="BB-8 full-scale replica"/></div>
+      <div class="card-body">
+        <div class="card-title">BB-8, Full Scale</div>
+        <div class="card-desc">Full-scale BB-8 replica (Star Wars) built entirely by hand: spherical body, magnetic head assembly, and detailed multi-layer paint job matching the film prop.</div>
+        <div class="card-tags"><span class="tag">Full scale</span><span class="tag">Hand-built</span><span class="tag">Magnetic head</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="photos-single"><img class="contain" src="diy-img/Image14.jpg" alt="TARDIS miniature, Doctor Who"/></div>
+      <div class="card-body">
+        <div class="card-title">TARDIS from Doctor Who</div>
+        <div class="card-desc">Hand-built TARDIS miniature painted in classic British police box blue, with printed signage, panel detailing, and integrated LED lighting inside the lamp on top.</div>
+        <div class="card-tags"><span class="tag">Wood & foam</span><span class="tag">LED wiring</span><span class="tag">Hand-painted</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NATURAL CRAFTS -->
+<div class="section">
+  <div class="section-label">Sculpture · Wire art · Wood carving</div>
+  <div class="section-title">Natural Crafts</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="photos-single"><img class="contain" src="diy-img/wire_bonsai.jpg" alt="Wire bonsai, copper wire sculpture"/></div>
+      <div class="card-body">
+        <div class="card-title">Wire Bonsai</div>
+        <div class="card-desc">Bonsai tree sculpted entirely from hand-twisted copper wire, with individual leaves shaped one by one, braided trunk with natural movement, and roots set in a hand-made clay bowl.</div>
+        <div class="card-tags"><span class="tag">Wire art</span><span class="tag">Copper wire</span><span class="tag">Clay</span></div>
+      </div>
+    </div>
+
+    <!-- Birds : 3 photos -->
+    <div class="card">
+      <div class="photos-trio">
+        <img class="contain" src="diy-img/Image8.png" alt="Carved bird, front view"/>
+        <img class="contain" src="diy-img/Image9.png" alt="Carved bird, back view"/>
+        <img class="contain" src="diy-img/Image10.png" alt="Carved bird, side view"/>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Hand-Carved Birds</div>
+        <div class="card-desc">Small birds hand-carved from wood and painted in acrylic after real species. Each piece is shaped with gouges and knives, with careful attention to color and markings for naturalistic detail.</div>
+        <div class="card-tags"><span class="tag">Wood carving</span><span class="tag">Acrylic painting</span><span class="tag">Naturalistic</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Julia Péladeau · <a href="index.html">Research Portfolio</a> · julia.peladeau@gmail.com
+</footer>
+
+</body>
+</html>
